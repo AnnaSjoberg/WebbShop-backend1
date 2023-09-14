@@ -59,8 +59,8 @@ public class CustomerHTMLController {
 
     @RequestMapping("/deleteById/{id}")
     public String delete(@PathVariable Long id, Model model) {
-        int orders = orderRepo.findByCustomerId(id).size(); //skapa en int som motsvarar antalet ordrar kunden gjort
-        if (orders <1) {
+        int noOfOrders = orderRepo.findByCustomerId(id).size(); //skapa en int som motsvarar antalet ordrar kunden gjort
+        if (noOfOrders <1) {
             customerRepo.deleteById(id);
         }else {
             Customer customer = customerRepo.findById(id).orElse(null);
@@ -70,7 +70,7 @@ public class CustomerHTMLController {
             model.addAttribute("id", customer.getId());
             model.addAttribute("idTitle", "Former Customer ID");
             model.addAttribute("orderTitle", "Number of orders");
-            model.addAttribute("orders", orders);
+            model.addAttribute("orders", noOfOrders);
         }
             model.addAttribute("message", "CUSTOMER DELETED!");
             model.addAttribute("deleted", true);
