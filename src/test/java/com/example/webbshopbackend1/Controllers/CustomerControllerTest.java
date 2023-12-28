@@ -72,6 +72,6 @@ class CustomerControllerTest {
     void addCustomer() throws Exception {
         this.mockMvc.perform(post("/customers/add").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":5, \"name\":\"Albert\", \"socialSecurityNumber\":\"777\"}"))
-                .andExpect(status().isOk()).andExpect(content().string(equalTo("Customer Albert added to database")));
+                .andExpect(status().isOk()).andExpect(content().string(equalTo("\t\tCustomer Albert added to database")));
     }
 }

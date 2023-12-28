@@ -107,40 +107,7 @@ public class ItemControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Saved NicePants"));
+                .andExpect(content().string("\t\tSaved NicePants"));
 
     }
-
-    //Nedan följer det kladdiga resultatet av en förvirrad Marias tester av add-funktionalitet med item som returtyp
-    /*
-    @Test
-    void addItemTest() throws Exception {
-        Item item1 = new Item(1L, "Pantalones", 599);
-        Item item2 = new Item(1L, "Pantalones2", 599);
-
-
-        when(itemRepo.findById(1L)).thenReturn(Optional.of(item1));
-        when(itemRepo.findById(1L)).thenReturn(Optional.of(item2)); //denna behövs för att köra över item1
-        //PUT^
-
-        mvc.perform(MockMvcRequestBuilders
-                        .post("/items/add")
-                        .content(asJsonString(item2))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Pantalones2"));
-
-        assert(itemRepo.findById(1L).get().getName().equals("Pantalones2"));
-              //  .andExpect(MockMvcResultMatchers.model().attributeExists());
-             //   .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists()); //equalTo("Necklace 4D")-
-    }
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 }

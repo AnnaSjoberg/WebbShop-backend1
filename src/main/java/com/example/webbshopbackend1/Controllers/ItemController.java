@@ -24,10 +24,18 @@ public class ItemController {
         return itemRepo.findById(id).get();
     }
 
+    @GetMapping("/sell/{id}")
+    public @ResponseBody Item sell(@PathVariable Long id){
+        Item item =itemRepo.findById(id).orElse(null);
+        item.setStock(item.getStock()-1);
+        itemRepo.save(item);
+        return item;
+    }
+
     //curl http://localhost:8080/items/add -H "Content-Type:application/json" -d "{\"name\":\"Lola-shirt\", \"price\":1745, \"stock\":5}" -v
     @PostMapping("/add")
     public String addItem(@RequestBody Item item){
         itemRepo.save(item);
-        return "Saved " + item.getName();
+        return "\t\tSaved " + item.getName();
     }
 }
